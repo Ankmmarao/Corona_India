@@ -163,7 +163,8 @@ if st.checkbox("Check The Total Cases of West Bengal"):
     total_cases_andhra_pradesh = data[data['State/UTs'] == 'West Bengal']['Total Cases'].values[0]
     st.write(f"Total Cases in West Bengal: {total_cases_andhra_pradesh}")
 
-selected_state = st.selectbox('Select a State/UT:', data['State/UTs'])
+selected_state = st.selectbox('Select a State/UT:', data.get('State/UTs', []))
+
 
 if st.button('Show Plots'):
     fig, axes = plt.subplots(1, 3, figsize=(15, 5))
