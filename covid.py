@@ -14,9 +14,11 @@ logo = Image.open('corona.jpeg')
 st.set_page_config(page_title="Corona  EDA", page_icon=":bar_chart:", layout="wide")
 st.image(logo)
 # Define the list of names
-names = ["M.Ankammarao", "k.reshi charan","U.N.V.Raviteja","Ganesh","p.Chandu"]
+names = [ "k.reshi charan","U.N.V.Raviteja","Ganesh","p.Chandu"]
 st.title("Exploratory Data Analysis on Covid-19 In India")
 # Add the names to the sidebar
+st.sidebar.title("Team Head:")
+st.sidebar.write("M.Ankammarao")
 st.sidebar.title("Project Team Members:")
 
 for name in names:
@@ -192,7 +194,7 @@ if st.checkbox("Get Data Visualization Of Corona In India State Wise"):
         except KeyError as e:
             st.error(f"KeyError: {e} - Data might be missing or in an unexpected format.")
 
-st.title('COVID-19 Total Cases by State')
+
 
 st.title('Total COVID-19 Cases by State/UTs')
 
