@@ -162,33 +162,36 @@ if st.checkbox("Check The Total Cases of Uttar Pradesh"):
 if st.checkbox("Check The Total Cases of West Bengal"):
     total_cases_andhra_pradesh = data[data['State/UTs'] == 'West Bengal']['Total Cases'].values[0]
     st.write(f"Total Cases in West Bengal: {total_cases_andhra_pradesh}")
+if st.checkbox("Get Data Visualization Of Corona In India State Wise"):
+    selected_state = st.selectbox('Select a State/UT:', data.get('State/UTs', []))
 
-selected_state = st.selectbox('Select a State/UT:', data.get('State/UTs', []))
+    if st.button('Show Plots'):
+        try:
+            fig, axes = plt.subplots(1, 3, figsize=(15, 5))
 
+            # Plot Death Ratio
+            axes[0].bar(data['State/UTs'], data['Death Ratio'])
+            axes[0].set_title('Death Ratio')
+            axes[0].set_ylabel('Ratio')
+            axes[0].set_xticklabels(data['State/UTs'], rotation=45)
+            
+            # Plot Discharge Ratio
+            axes[1].bar(data['State/UTs'], data['Discharge Ratio'])
+            axes[1].set_title('Discharge Ratio')
+            axes[1].set_ylabel('Ratio')
+            axes[1].set_xticklabels(data['State/UTs'], rotation=45)
 
-if st.button('Show Plots'):
-    fig, axes = plt.subplots(1, 3, figsize=(15, 5))
+            # Plot Population
+            axes[2].bar(data['State/UTs'], data['Population'])
+            axes[2].set_title('Population')
+            axes[2].set_ylabel('Population')
+            axes[2].set_xticklabels(data['State/UTs'], rotation=45)
 
-    # Plot Death Ratio
-    axes[0].bar(data['State/UTs'], data['Death Ratio'])
-    axes[0].set_title('Death Ratio')
-    axes[0].set_ylabel('Ratio')
-    axes[0].set_xticklabels(data['State/UTs'], rotation=45)
-    
-    # Plot Discharge Ratio
-    axes[1].bar(data['State/UTs'], data['Discharge Ratio'])
-    axes[1].set_title('Discharge Ratio')
-    axes[1].set_ylabel('Ratio')
-    axes[1].set_xticklabels(data['State/UTs'], rotation=45)
+            plt.tight_layout()
+            st.pyplot(fig)
+        except KeyError as e:
+            st.error(f"KeyError: {e} - Data might be missing or in an unexpected format.")
 
-    # Plot Population
-    axes[2].bar(data['State/UTs'], data['Population'])
-    axes[2].set_title('Population')
-    axes[2].set_ylabel('Population')
-    axes[2].set_xticklabels(data['State/UTs'], rotation=45)
-
-    plt.tight_layout()
-    st.pyplot(fig)
 st.title('COVID-19 Total Cases by State')
 
 st.title('Total COVID-19 Cases by State/UTs')
